@@ -18,7 +18,7 @@ public class Consumer {
 
 //        String bootstrapServer = "127.0.0.1:9092";
          String gcpBootstrapServer = "35.208.65.122:9092";
-        String topic = "orders";
+        String topic = "covid-tweets";
 
         Properties properties = new Properties();
         properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, gcpBootstrapServer);
@@ -39,7 +39,7 @@ public class Consumer {
             ConsumerRecords<String, String> records = consumer.poll(duration);
             for(ConsumerRecord<String, String> record : records){
                 logger.info("Key: " + record.key() + " ,Value: " + record.value());
-                logger.info("Partition: " + record.partition() + " ,Offset " + record.offset());
+//                logger.info("Partition: " + record.partition() + " ,Offset " + record.offset());
             }
         }
     }

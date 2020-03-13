@@ -2,7 +2,7 @@ from kafka import KafkaConsumer
 import json
 
 # To consume latest messages and auto-commit offsets
-consumer = KafkaConsumer('orders',
+consumer = KafkaConsumer('order-validation',
                          bootstrap_servers=['35.208.65.122:9092'],
                          value_deserializer=lambda m: json.loads(m.decode('ascii')))
 
