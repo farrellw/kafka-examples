@@ -1,4 +1,4 @@
-# Commands and Code for Hours With Experts - Kafka Class.
+# Java, Python, Scala, and Command Line Examples for Kafka Consumers and Producers
 
 ## Running Zookeeper and Kafka
 
@@ -23,4 +23,7 @@ Found in CLI/COMMANDS.md
 Found in python directory
 
 ## Java Consumer and Producer
-Found in src
+Found in src/main/java
+
+## Scala Consumer and Producer
+Found in src/main/java
