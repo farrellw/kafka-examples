@@ -3,13 +3,14 @@ package com.github.farrellw
 import java.util.Properties
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.github.farrellw.ScalaConsumer.ScalaOrder
 import org.apache.kafka.clients.producer.{Callback, KafkaProducer, ProducerConfig, ProducerRecord, RecordMetadata}
 import org.apache.kafka.common.serialization.StringSerializer
 import org.slf4j.LoggerFactory
 import com.github.javafaker.Faker
 
 object ScalaProducer extends App {
-  val bootstrapServer = "http://localhost:9092"
+  val bootstrapServer = "35.225.13.175:9092"
   val topic = "orders"
 
   val logger = LoggerFactory.getLogger(classOf[Producer])
@@ -33,9 +34,11 @@ object ScalaProducer extends App {
     val order = new Order(faker.commerce.price, faker.commerce.productName)
     val customerId = Integer.toString(id)
     val jsonString = objectMapper.writeValueAsString(order)
+    println(jsonString)
 
    new ProducerRecord[String, String](topic, customerId, jsonString)
   }).foreach(record => {
+
     producer.send(record, new Callback() {
       override def onCompletion(recordMetadata: RecordMetadata, e: Exception): Unit = {
         if (e == null) {

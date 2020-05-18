@@ -1,5 +1,6 @@
 package com.github.farrellw;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -16,8 +17,7 @@ public class Consumer {
     public static void main(String[] args) {
         Logger logger =  LoggerFactory.getLogger(Consumer.class.getName());
 
-//        String bootstrapServer = "127.0.0.1:9092";
-         String gcpBootstrapServer = "35.208.65.122:9092";
+         String gcpBootstrapServer = "35.225.13.175:9092";
         String topic = "orders";
 
         Properties properties = new Properties();
@@ -32,12 +32,20 @@ public class Consumer {
 
         // subscribe consumer
         consumer.subscribe(Arrays.asList(topic));
+        ObjectMapper objectMapper = new ObjectMapper();
 
         // poll for new data
         while(true){
             Duration duration = Duration.ofMillis(100);
             ConsumerRecords<String, String> records = consumer.poll(duration);
             for(ConsumerRecord<String, String> record : records){
+                try {
+                    Order order  = objectMapper.readValue(record.value(), Order.class);
+                }catch (Exception e) {
+                    System.out.println("Done screwed up");
+                    System.out.println(e);
+                }
+
                 logger.info("Key: " + record.key() + " ,Value: " + record.value());
                 logger.info("Partition: " + record.partition() + " ,Offset " + record.offset());
             }

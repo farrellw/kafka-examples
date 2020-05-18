@@ -1,16 +1,18 @@
 package com.github.farrellw
 
+import java.beans.BeanProperty
 import java.time.Duration
 import java.util
 import java.util.Properties
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.apache.kafka.clients.consumer.{ConsumerConfig, ConsumerRecords, KafkaConsumer}
 import org.apache.kafka.common.serialization.StringDeserializer
 import org.slf4j.LoggerFactory
 
 object ScalaConsumer extends App {
-  val bootstrapServer = "http://localhost:9092"
-  val topic = "orders"
+  val bootstrapServer = "35.225.13.175:9092"
+  val topic: String = "orders"
 
   val logger = LoggerFactory.getLogger(classOf[Consumer].getName)
 
@@ -25,17 +27,18 @@ object ScalaConsumer extends App {
   // subscribe consumer
   consumer.subscribe(util.Arrays.asList(topic))
 
+  val objectMapper = new ObjectMapper
   // poll for new data
   while ( {
     true
   }) {
     val duration: Duration = Duration.ofMillis(100)
     val records: ConsumerRecords[String, String] = consumer.poll(duration)
-    import scala.collection.JavaConversions._
-    for (record <- records) {
+
+    records.forEach(record => {
+      val order  = objectMapper.readValue(record.value(), classOf[Order])
       logger.info("Key: " + record.key + " ,Value: " + record.value)
       logger.info("Partition: " + record.partition + " ,Offset " + record.offset)
-    }
+    })
   }
-
 }
