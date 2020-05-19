@@ -5,7 +5,7 @@ import java.util
 import java.util.Properties
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import org.apache.kafka.clients.consumer.{ConsumerConfig, ConsumerRecords, KafkaConsumer}
+import org.apache.kafka.clients.consumer.{ConsumerConfig, ConsumerRecord, ConsumerRecords, KafkaConsumer}
 import org.apache.kafka.common.serialization.StringDeserializer
 import org.slf4j.LoggerFactory
 
@@ -33,8 +33,7 @@ object ScalaConsumer extends App {
   }) {
     val duration: Duration = Duration.ofMillis(100)
     val records: ConsumerRecords[String, String] = consumer.poll(duration)
-
-    records.forEach(record => {
+    records.forEach((record: ConsumerRecord[String, String]) => {
       val order  = objectMapper.readValue(record.value(), classOf[Order])
       logger.info("Key: " + record.key + " ,Value: " + record.value)
       logger.info("Partition: " + record.partition + " ,Offset " + record.offset)
