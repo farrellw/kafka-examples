@@ -1,6 +1,5 @@
 package com.github.farrellw
 
-import java.beans.BeanProperty
 import java.time.Duration
 import java.util
 import java.util.Properties

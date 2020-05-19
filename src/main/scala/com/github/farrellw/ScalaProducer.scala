@@ -3,7 +3,6 @@ package com.github.farrellw
 import java.util.Properties
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.github.farrellw.ScalaConsumer.ScalaOrder
 import org.apache.kafka.clients.producer.{Callback, KafkaProducer, ProducerConfig, ProducerRecord, RecordMetadata}
 import org.apache.kafka.common.serialization.StringSerializer
 import org.slf4j.LoggerFactory
