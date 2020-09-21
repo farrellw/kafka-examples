@@ -27,3 +27,6 @@ Found in src/main/java
 
 ## Scala Consumer and Producer
 Found in src/main/java
+
+## Faker
+This repository uses faker to generate data to publish to a Kafka topic. Documentation on faker can be found http://dius.github.io/java-faker/apidocs/index.html and https://github.com/DiUS/java-faker

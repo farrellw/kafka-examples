@@ -3,7 +3,7 @@ import json
 
 # To consume latest messages and auto-commit offsets
 consumer = KafkaConsumer('orders',
-                         bootstrap_servers=['35.208.65.122:9092'],
+                         bootstrap_servers=['35.222.98.82:9092'],
                          value_deserializer=lambda m: json.loads(m.decode('ascii')))
 
 for message in consumer:

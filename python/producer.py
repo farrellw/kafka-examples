@@ -22,7 +22,7 @@ for i in range(1, 10):
     random_name = fake.name()
     customer_id = str(fake.random_int(0, 10))
     # produce asynchronously with callbacks
-    data = {'random-name': random_name, 'random-int': random_int}
+    data = {'item': random_name, 'price': random_int}
     print("Sending key=%s, data=%s" % (customer_id, data))
     producer.send('orders', data, str.encode(customer_id)).add_callback(on_send_success).add_errback(on_send_error)
 

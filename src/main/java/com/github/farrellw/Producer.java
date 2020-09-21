@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 public class Producer {
 
     public static void main(String[] args) throws JsonProcessingException {
-         String gcpBootstrapServer = "35.225.13.175:9092";
+        String gcpBootstrapServer = "35.225.13.175:9092";
         String topic = "orders";
 
         Logger logger = LoggerFactory.getLogger(Producer.class);
